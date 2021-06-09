@@ -1,0 +1,7 @@
+connexion==2.7.0
+SQLAlchemy==1.4.17
+Flask==2.0.1
+Flask_SQLAlchemy==2.5.1
+marshmallow_sqlalchemy==0.26.1
+flask_marshmallow==0.14.0
+gunicorn
