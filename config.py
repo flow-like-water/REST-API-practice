@@ -12,7 +12,7 @@ connex_app = connexion.App(__name__, specification_dir=basedir)
 app = connex_app.app
 
 # Build the Sqlite ULR for SqlAlchemy
-sqlite_url = os.environ.get('DATABASE_URL')
+sqlite_url = os.environ.get('DATABASE_URL?sslmode=require').replace('postgres://', 'postgresql://')
 
 # Configure the SqlAlchemy part of the app instance
 app.config["SQLALCHEMY_ECHO"] = True
