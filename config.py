@@ -2,6 +2,7 @@ import os
 import connexion
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
+import psycopg2
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -12,9 +13,7 @@ connex_app = connexion.App(__name__, specification_dir=basedir)
 app = connex_app.app
 
 # Build the Sqlite ULR for SqlAlchemy
-sqlite_url = os.getenv("DATABASE_URL")  # or other relevant config var
-if sqlite_url.startswith("postgres://"):
-    sqlite_url = sqlite_url.replace("postgres://", "postgresql://", 1)
+sqlite_url = "sqlite:///" + os.path.join(basedir, "people.db")
 
 # Configure the SqlAlchemy part of the app instance
 app.config["SQLALCHEMY_ECHO"] = True

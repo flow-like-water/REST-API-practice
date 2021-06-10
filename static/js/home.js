@@ -86,20 +86,20 @@ ns.view = (function() {
     'use strict';
 
     let $person_id = $('#person_id'),
-        $fname = $('#fname'),
-        $lname = $('#lname');
+        $first_name = $('#first_name'),
+        $last_name = $('#last_name');
 
     // return the API
     return {
         reset: function() {
             $person_id.val('');
-            $lname.val('');
-            $fname.val('').focus();
+            $last_name.val('');
+            $first_name.val('').focus();
         },
         update_editor: function(person) {
             $person_id.val(person.person_id);
-            $lname.val(person.lname);
-            $fname.val(person.fname).focus();
+            $last_name.val(person.last_name);
+            $first_name.val(person.first_name).focus();
         },
         build_table: function(people) {
             let rows = ''
@@ -112,8 +112,8 @@ ns.view = (function() {
                 for (let i=0, l=people.length; i < l; i++) {
                     rows += `<tr data-person-id="${people[i].person_id}">
                         <td class="person_id">${people[i].person_id}</td>
-                        <td class="fname">${people[i].fname}</td>
-                        <td class="lname">${people[i].lname}</td>
+                        <td class="first_name">${people[i].first_name}</td>
+                        <td class="last_name">${people[i].last_name}</td>
                         <td>${people[i].timestamp}</td>
                     </tr>`;
                 }
@@ -139,8 +139,8 @@ ns.controller = (function(m, v) {
         view = v,
         $event_pump = $('body'),
         $person_id = $('#person_id'),
-        $fname = $('#fname'),
-        $lname = $('#lname');
+        $first_name = $('#first_name'),
+        $last_name = $('#last_name');
 
     // Get the data from the model after the controller is done initializing
     setTimeout(function() {
@@ -148,21 +148,21 @@ ns.controller = (function(m, v) {
     }, 100)
 
     // Validate input
-    function validate(fname, lname) {
-        return fname !== "" && lname !== "";
+    function validate(first_name, last_name) {
+        return first_name !== "" && last_name !== "";
     }
 
     // Create our event handlers
     $('#create').click(function(e) {
-        let fname = $fname.val(),
-            lname = $lname.val();
+        let first_name = $first_name.val(),
+            last_name = $last_name.val();
 
         e.preventDefault();
 
-        if (validate(fname, lname)) {
+        if (validate(first_name, last_name)) {
             model.create({
-                'fname': fname,
-                'lname': lname,
+                'first_name': first_name,
+                'last_name': last_name,
             })
         } else {
             alert('Problem with first or last name input');
@@ -171,16 +171,16 @@ ns.controller = (function(m, v) {
 
     $('#update').click(function(e) {
         let person_id = $person_id.val(),
-            fname = $fname.val(),
-            lname = $lname.val();
+            first_name = $first_name.val(),
+            last_name = $last_name.val();
 
         e.preventDefault();
 
-        if (validate(fname, lname)) {
+        if (validate(first_name, last_name)) {
             model.update({
                 person_id: person_id,
-                fname: fname,
-                lname: lname,
+                first_name: first_name,
+                last_name: last_name,
             })
         } else {
             alert('Problem with first or last name input');
@@ -193,7 +193,7 @@ ns.controller = (function(m, v) {
 
         e.preventDefault();
 
-        if (validate('placeholder', lname)) {
+        if (validate('placeholder', last_name)) {
             model.delete(person_id)
         } else {
             alert('Problem with first or last name input');
@@ -208,27 +208,27 @@ ns.controller = (function(m, v) {
     $('table > tbody').on('dblclick', 'tr', function(e) {
         let $target = $(e.target),
             person_id,
-            fname,
-            lname;
+            first_name,
+            last_name;
 
         person_id = $target
             .parent()
             .attr('data-person-id');
 
-        fname = $target
+        first_name = $target
             .parent()
-            .find('td.fname')
+            .find('td.first_name')
             .text();
 
-        lname = $target
+        last_name = $target
             .parent()
-            .find('td.lname')
+            .find('td.last_name')
             .text();
 
         view.update_editor({
             person_id: person_id,
-            fname: fname,
-            lname: lname,
+            first_name: first_name,
+            last_name: last_name,
         });
     });
 

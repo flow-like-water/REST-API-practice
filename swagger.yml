@@ -29,10 +29,10 @@ paths:
                 person_id:
                   type: string
                   description: Id of the person
-                fname:
+                first_name:
                   type: string
                   description: First name of the person
-                lname:
+                last_name:
                   type: string
                   description: Last name of the person
                 timestamp:
@@ -53,10 +53,10 @@ paths:
           schema:
             type: object
             properties:
-              fname:
+              first_name:
                 type: string
                 description: First name of person to create
-              lname:
+              last_name:
                 type: string
                 description: Last name of person to create
       responses:
@@ -67,10 +67,10 @@ paths:
               person_id:
                 type: string
                 description: Id of the person
-              fname:
+              first_name:
                 type: string
                 description: First name of the person
-              lname:
+              last_name:
                 type: string
                 description: Last name of the person
               timestamp:
@@ -99,10 +99,10 @@ paths:
               person_id:
                 type: string
                 description: Id of the person
-              fname:
+              first_name:
                 type: string
                 description: First name of the person
-              lname:
+              last_name:
                 type: string
                 description: Last name of the person
               timestamp:
@@ -126,10 +126,10 @@ paths:
           schema:
             type: object
             properties:
-              fname:
+              first_name:
                 type: string
                 description: First name of the person
-              lname:
+              last_name:
                 type: string
                 description: Last name of the person
       responses:
@@ -140,10 +140,10 @@ paths:
               person_id:
                 type: string
                 description: Id of the person in the database
-              fname:
+              first_name:
                 type: string
                 description: First name of the person
-              lname:
+              last_name:
                 type: string
                 description: Last name of the person
               timestamp:

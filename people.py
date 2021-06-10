@@ -16,7 +16,7 @@ def read_all():
     :return:        json string of list of people
     """
     # Create the list of people from our data
-    people = Person.query.order_by(Person.lname).all()
+    people = Person.query.order_by(Person.last_name).all()
 
     # Serialize the data for the response
     person_schema = PersonSchema(many=True)
@@ -59,12 +59,12 @@ def create(person):
     :param person:  person to create in people structure
     :return:        201 on success, 406 on person exists
     """
-    fname = person.get("fname")
-    lname = person.get("lname")
+    first_name = person.get("first_name")
+    last_name = person.get("last_name")
 
     existing_person = (
-        Person.query.filter(Person.fname == fname)
-        .filter(Person.lname == lname)
+        Person.query.filter(Person.first_name == first_name)
+        .filter(Person.last_name == last_name)
         .one_or_none()
     )
 
@@ -88,8 +88,8 @@ def create(person):
     else:
         abort(
             409,
-            "Person {fname} {lname} exists already".format(
-                fname=fname, lname=lname
+            "Person {first_name} {last_name} exists already".format(
+                first_name=first_name, last_name=last_name
             ),
         )
 
@@ -110,12 +110,12 @@ def update(person_id, person):
     ).one_or_none()
 
     # Try to find an existing person with the same name as the update
-    fname = person.get("fname")
-    lname = person.get("lname")
+    first_name = person.get("first_name")
+    last_name = person.get("last_name")
 
     existing_person = (
-        Person.query.filter(Person.fname == fname)
-        .filter(Person.lname == lname)
+        Person.query.filter(Person.first_name == first_name)
+        .filter(Person.last_name == last_name)
         .one_or_none()
     )
 
@@ -132,8 +132,8 @@ def update(person_id, person):
     ):
         abort(
             409,
-            "Person {fname} {lname} exists already".format(
-                fname=fname, lname=lname
+            "Person {first_name} {last_name} exists already".format(
+                first_name=first_name, last_name=last_name
             ),
         )
 
